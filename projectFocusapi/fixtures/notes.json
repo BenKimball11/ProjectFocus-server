@@ -1,0 +1,28 @@
+[
+    {
+        "model": "projectFocusapi.note",
+        "pk": 1,
+        "fields": {
+            "super": 1,
+            "lotId": 1,
+            "name": "This lost is poppin",
+            "date": "2021-10-08",
+            "itemsReceived": "none",
+            "description": "too many rocks",
+            "contactNumber": 6156533455
+        }
+    },
+    {
+        "model": "projectFocusapi.note",
+        "pk": 2,
+        "fields": {
+            "super": 1,
+            "lotId": 1,
+            "name": "this lot not poppin",
+            "date": "2021-10-08",
+            "itemsReceived": "none",
+            "description": "too many rocks",
+            "contactNumber": 6156533455
+        }
+    }
+]

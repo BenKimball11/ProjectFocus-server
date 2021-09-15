@@ -1,0 +1,24 @@
+[
+    {
+        "model": "projectFocusapi.lot",
+        "pk": 1,
+        "fields": {
+            "super": 1,
+            "project": 1,
+            "lotSize": "2 acres",
+            "lotNumber": 1,
+            "lotNote": 1
+        }
+    },
+    {
+        "model": "projectFocusapi.lot",
+        "pk": 2,
+        "fields": {
+            "super": 1,
+            "project": 2,
+            "lotSize": "2 acres",
+            "lotNumber": 2,
+            "lotNote": 2
+        }
+    }
+]

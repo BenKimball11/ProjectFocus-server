@@ -10,7 +10,7 @@ class Lot(models.Model):
         number_of_players (IntegerField): The max number of players of the game
         maker (CharField): The company that made the game
     """
-    name = models.CharField(max_length=100)
+    lotNote = models.ForeignKey("note", on_delete=models.CASCADE )
     project = models.ForeignKey("Project", on_delete=models.CASCADE)
     lotSize = models.CharField(max_length=150)
     lotNumber = models.IntegerField()
