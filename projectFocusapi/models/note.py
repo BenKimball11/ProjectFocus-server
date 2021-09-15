@@ -13,9 +13,9 @@ class Note(models.Model):
         attendees (ManyToManyField): The gamers attending the event
     """
     super = models.ForeignKey("Super", on_delete=models.CASCADE)
+    lotNote = models.ForeignKey("lot", on_delete=models.CASCADE)
     name = models.TextField()
-    lot = models.ForeignKey("Lot", on_delete=models.CASCADE)
     date = models.DateField()
     itemsReceived = models.TextField()
-    note = models.CharField(max_length=100)
+    description = models.CharField(max_length=100)
     contactNumber = models.IntegerField()

@@ -1,0 +1,10 @@
+[
+    {
+        "model": "projectFocusapi.super",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "email": "me@me.com"
+        }
+    }
+]
