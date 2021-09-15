@@ -1,4 +1,5 @@
 """View module for handling requests about games"""
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseServerError
 from rest_framework import status
@@ -90,8 +91,41 @@ class LotView(ViewSet):
             return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+
+class LotUserSerializer(serializers.ModelSerializer):
+    """JSON serializer for event organizer's related Django user"""
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']        
+
+class LotSuperSerializer(serializers.ModelSerializer):
+    """JSON serializer for event organizer"""
+    user = LotUserSerializer(many=False)
+
+    class Meta:
+        model = Super
+        fields = ['user']
+
+class NoteSerializer(serializers.ModelSerializer):
+    """JSON serializer for games"""
+    class Meta:
+        model = Note
+        fields = '__all__'
+
 class LotSerializer(serializers.ModelSerializer):
+
+    super = LotSuperSerializer(many=False)
+    lotNote = NoteSerializer(many=False)
     class Meta:
         model = Lot
         fields = '__all__'
         # depth = 2
+
+class LotNoteSerializer(serializers.ModelSerializer):
+    """ JSON serializer for events """
+    ##super = NoteSuperSerializer(many=False)
+    ##lot = LotSerializer(many=False)
+
+    class Meta:
+        model = Note
+        fields = ['name',] 

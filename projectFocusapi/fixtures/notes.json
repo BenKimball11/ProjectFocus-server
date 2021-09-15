@@ -4,7 +4,7 @@
         "pk": 1,
         "fields": {
             "super": 1,
-            "lot_note": 1,
+            "lotId": 1,
             "name": "This lost is poppin",
             "date": "2021-10-08",
             "itemsReceived": "none",
@@ -17,7 +17,7 @@
         "pk": 2,
         "fields": {
             "super": 1,
-            "lotNote": 1,
+            "lotId": 1,
             "name": "this lot not poppin",
             "date": "2021-10-08",
             "itemsReceived": "none",

@@ -172,3 +172,12 @@ class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = '__all__'
+
+""" class LotNoteSerializer(serializers.ModelSerializer):
+    JSON serializer for events
+    super = NoteSuperSerializer(many=False)
+    lot = LotSerializer(many=False)
+
+    class Meta:
+        model = Note
+        fields = ['name',] """
