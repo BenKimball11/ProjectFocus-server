@@ -1,0 +1,18 @@
+[
+    {
+        "model": "projectFocusapi.projectnote",
+        "pk": 1,
+        "fields": {
+            "project": 1,
+            "note": 1
+        }
+    },
+    {
+        "model": "projectFocusapi.projectnote",
+        "pk": 2,
+        "fields": {
+            "project": 1,
+            "note": 2
+        }
+    }
+]
