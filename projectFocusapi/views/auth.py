@@ -58,6 +58,7 @@ def register_user(request):
         email=request.data['email'],
         user=new_user
     )
+    super.save()
 
     # Use the REST Framework's token generator on the new user account
     token = Token.objects.create(user=super.user)

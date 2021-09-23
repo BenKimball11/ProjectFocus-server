@@ -3,6 +3,7 @@
         "model": "projectFocusapi.project",
         "pk": 1,
         "fields": {
+            "lotId": 1,
             "name": "painting interior walls",
             "estimatedCost": 2000,
             "estimatedCompletionDate": "2021-10-8"
@@ -12,6 +13,7 @@
         "model": "projectFocusapi.project",
         "pk": 2,
         "fields": {
+            "lotId": 1,
             "name": "painting exterior",
             "estimatedCost": 2000,
             "estimatedCompletionDate": "2021-10-8"
@@ -21,6 +23,7 @@
         "model": "projectFocusapi.project",
         "pk": 3,
         "fields": {
+            "lotId": 1,
             "name": "caulking interior seams",
             "estimatedCost": 2000,
             "estimatedCompletionDate": "2021-10-8"

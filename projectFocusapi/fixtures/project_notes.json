@@ -1,10 +1,9 @@
 [
     {
-        "model": "projectFocusapi.note",
+        "model": "projectFocusapi.projectnote",
         "pk": 1,
         "fields": {
-            "super": 1,
-            "lotId": 1,
+            "projectId": 1,
             "name": "This lost is poppin",
             "date": "2021-10-08",
             "itemsReceived": "none",
@@ -13,11 +12,10 @@
         }
     },
     {
-        "model": "projectFocusapi.note",
+        "model": "projectFocusapi.projectnote",
         "pk": 2,
         "fields": {
-            "super": 1,
-            "lotId": 1,
+            "projectId": 1,
             "name": "this lot not poppin",
             "date": "2021-10-08",
             "itemsReceived": "none",
