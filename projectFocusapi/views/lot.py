@@ -62,7 +62,12 @@ class LotView(ViewSet):
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
     def list(self, request):
-        lots = Lot.objects.all()
+
+        super = Super.objects.get(user=request.auth.user)
+
+        lots = Lot.objects.filter(super=super)
+        """ if super is not None:
+            lots = lots.filter(user=super.user) """ 
 
 
         serializer = LotSerializer(lots, many=True, context={'request': request})
@@ -120,19 +125,18 @@ class LotView(ViewSet):
 
 
 
-class LotUserSerializer(serializers.ModelSerializer):
-    """JSON serializer for event organizer's related Django user"""
+""" class LotUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email']        
-
+ """
 class LotSuperSerializer(serializers.ModelSerializer):
-    """JSON serializer for event organizer"""
-    user = LotUserSerializer(many=False)
+    
+    #user = LotUserSerializer(many=False)
 
     class Meta:
         model = Super
-        fields = ['user']
+        fields = '__all__'
 
 
 class ProjectSerializer(serializers.ModelSerializer):
