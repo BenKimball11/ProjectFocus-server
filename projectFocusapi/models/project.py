@@ -15,10 +15,10 @@ class Project(models.Model):
     lotId = models.ForeignKey("lot", on_delete=models.CASCADE)
     estimatedCompletionDate = models.DateField()
     estimatedCost = models.IntegerField()
-    notes = models.ManyToManyField("Note", through="ProjectNote")
+    #notes = models.ManyToManyField("Note", through="ProjectNote")
 
     @property
     def project_notes(self):
-        notes = ProjectNote.objects.filter(project=self)
-        return notes 
+        projectnotes = ProjectNote.objects.filter(projectId=self)
+        return projectnotes 
     

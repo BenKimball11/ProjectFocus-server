@@ -7,7 +7,7 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
-from projectFocusapi.models import Lot, Project, Note, Super, ProjectNote
+from projectFocusapi.models import Lot, Project, Super, ProjectNote
 
 
 class ProjectView(ViewSet):
@@ -18,8 +18,6 @@ class ProjectView(ViewSet):
         Returns:
             Response -- JSON serialized event instance
         """
-        ##super = Super.objects.get(user=request.auth.user)
-        #projectNote = Note.objects.get(pk=request.data['projectNote'])
         lot = Lot.objects.get(pk=request.data["lotId"])
 
         project = Project()
@@ -32,8 +30,8 @@ class ProjectView(ViewSet):
 
         try:
             project.save()
-            serializer = ProjectSerializer(project, context={'request': request})
-            return Response(serializer.data)
+            serializer = ProjectSerializer(project, context={'request': request}) #converting data into json
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as ex:
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -96,15 +94,7 @@ class ProjectView(ViewSet):
         """
         projects = Project.objects.all()
 
-
-        lot = self.request.query_params.get('lot_id', None)
-        if lot is not None:
-            projects = projects.filter(lot__id=lot)
-        # Note the additional `many=True` argument to the
-        # serializer. It's needed when you are serializing
-        # a list of objects instead of a single object.
-        serializer = ProjectSerializer(
-            projects, many=True, context={'request': request})
+        serializer = ProjectSerializer(projects, many=True, context={'request': request}) # convert to json
         return Response(serializer.data)
 
 
@@ -113,12 +103,12 @@ class ProjectView(ViewSet):
     #will take the name of the method and turn it into the route we can go to because that is the method name.
     def signup(self, request, pk):
         #get the gamer, taking the token and matching it from the front end
-        note = Note.objects.get(user=request.auth.user)
+        project_note = ProjectNote.objects.get(user=request.auth.user)
         #try block here to try and get the event, if that doesnt work because the event doesnt exist
         #it will go the except block and respond with the message and return the 404_not_found error
         try:
-            note = Note.objects.get(pk=pk)
-        except Note.DoesNotExist:
+            project_note = ProjectNote.objects.get(pk=pk)
+        except ProjectNote.DoesNotExist:
             return Response(
             {'message': 'Event does not exist.'},
             status=status.HTTP_404_NOT_FOUND
@@ -126,7 +116,7 @@ class ProjectView(ViewSet):
         #if the method we are using is post, then add the gamer to the attendees list. by using add and passing the gamer to it
         if request.method == "POST":
             try:
-                note.projects.add(note)
+                project_note.projects.add(project_note)
                 #if that works, send the 201 created status
                 return Response({}, status=status.HTTP_201_CREATED) #empty dictionary bc not wanting to do with anything with the data thats sent back
             except Exception as ex:
@@ -136,17 +126,17 @@ class ProjectView(ViewSet):
         elif request.method == "DELETE":
             try:
             #if the delete request is successful, send a 204_no_content response, which will return nothing other than the status
-                note.projects.remove(note)
+                project_note.projects.remove(project_note)
                 return Response(None, status=status.HTTP_204_NO_CONTENT)
             except Exception as ex:
                 #if that doesnt work, send the response at the zero index
                 return Response({'message': ex.args[0]})
 
-class NoteSerializer(serializers.ModelSerializer):
-    """JSON serializer for games"""
+""" class NoteSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Note
-        fields = '__all__'
+        fields = '__all__' """
 
 class ProjectUserSerializer(serializers.ModelSerializer):
     """JSON serializer for event organizer's related Django user"""
@@ -163,11 +153,11 @@ class ProjectUserSerializer(serializers.ModelSerializer):
         fields = ['user'] """
 
 class ProjectNoteSerializer(serializers.ModelSerializer):
-    note = NoteSerializer(many=False)
 
     class Meta:
         model = ProjectNote
         fields = '__all__'
+
 class ProjectSerializer(serializers.ModelSerializer):
     project_notes = ProjectNoteSerializer(many=True)
     #super = ProjectSuperSerializer(many=False)
